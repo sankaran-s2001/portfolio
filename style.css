@@ -12,7 +12,8 @@ html {
   --card: #ffffff;
   --muted: #5b6b75;
   --accent: #0ea5a4;
-  --accent-2: #2563eb;
+  --accent-2: #60a5fa;
+  --accent-light: #66d9e8; /* lighter version for tags */
   --glass: rgba(10,10,10,0.03);
   --text: #0b1220;
   --radius: 12px;
@@ -26,6 +27,7 @@ html {
   --muted: #9aa6b2;
   --accent: #2dd4bf;
   --accent-2: #60a5fa;
+  --accent-light: #66d9e8; /* lighter version for tags */
   --glass: rgba(255,255,255,0.04);
   --text: #e6eef6;
 }
@@ -113,12 +115,13 @@ header {
 }
 
 .profile { 
-  width: 160px; 
-  height: 160px; 
-  border-radius: 14px; 
+  width: 180px; 
+  height: 180px; 
+  border-radius: 16px; 
   overflow: hidden; 
   border: 3px solid var(--glass); 
-  margin: auto; 
+  margin: auto;
+  box-shadow: 0 8px 26px rgba(2,6,23,0.45); 
 }
 
 .eyebrow { 
@@ -267,6 +270,116 @@ header {
   font-size: .95rem; 
 }
 
+
+/* Education grid - single column, full width like experience */
+.education-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.education-card {
+  background: var(--card);
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 8px 26px rgba(2,6,23,0.45);
+  transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+  transform: translateY(0);
+  cursor: pointer;
+  width: 100%;
+}
+
+.education-card:hover {
+  transform: translateY(-8px) scale(1.02);
+  box-shadow: 0 20px 40px rgba(2,6,23,0.15), 0 0 0 1px rgba(255,255,255,0.05);
+}
+
+/* Certification grid - 2x2 layout like contact */
+.certification-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 18px;
+}
+
+/* Certification cards */
+.certification-card {
+  background: var(--card);
+  padding: 16px;
+  border-radius: 12px;
+  box-shadow: 0 8px 26px rgba(2,6,23,0.45);
+  transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+  transform: translateY(0);
+  cursor: pointer;
+}
+
+.certification-card:hover {
+  transform: translateY(-8px) scale(1.02);
+  box-shadow: 0 20px 40px rgba(2,6,23,0.15), 0 0 0 1px rgba(255,255,255,0.05);
+}
+
+.certification-card h3 {
+  margin: 0.3rem 0;
+}
+
+.certification-card p {
+  color: var(--muted);
+  font-size: .95rem;
+}
+
+
+/* Keep certification button bottom-aligned */
+.certification-card {
+  display: flex;
+  flex-direction: column;
+}
+
+.certification-card p {
+  flex-grow: 1; /* lets description take space and push button down */
+}
+
+/* Certification button */
+.certification-card .cert-link {
+  margin-top: auto;
+  width: 100%;
+  height: 40px;
+
+  display: flex;             /* flexbox ensures centering */
+  justify-content: center;   /* center horizontally */
+  align-items: center;       /* center vertically */
+
+  border-radius: 6px;
+  background: var(--accent);
+  color: white;
+  font-size: 0.9rem;
+  font-weight: 600;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.certification-card .cert-link:hover {
+  background: var(--accent-2);
+  transform: translateY(-2px);
+}
+
+
+
+/* Responsive adjustments */
+@media(max-width:880px){
+  /* Certification grid becomes single column on mobile */
+  .certification-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .education-card {
+    width: 100%;
+  }
+}
+
+
+
+
+
 /* Contact cards - center headings */
 .contact-card h3 {
   text-align: center;
@@ -283,38 +396,35 @@ header {
   .contact-grid {
     grid-template-columns: 1fr;
   }
-  
+}
+
+
+@media(max-width:880px){
   .experience-card {
     width: 100%;
   }
 }
 
 
-/* Certificate link button */
-.cert-link {
+.tag {
   display: inline-block;
-  margin-top: 8px;
-  padding: 6px 12px;
-  background: var(--accent);
-  color: white;
-  border-radius: 6px;
-  font-size: 0.85rem;
-  font-weight: 600;
-  transition: all 0.3s ease;
+  padding: 5px 6px;
+  border-radius: 399px;
+  font-size: 0.62rem;
+  font-weight: 500;
+  background: transparent;
+  color: #555;               /* medium-dark grey */
+  border: 1px solid #ccc;    /* light grey border */
+  cursor: default;
+  transition: all 0.2s ease;
 }
 
-.cert-link:hover {
-  background: var(--accent-2);
-  transform: translateY(-2px);
+.tag:hover {
+  background: #f9f9f9;       /* faint fill on hover */
+  border-color: #aaa;        /* darker border */
 }
 
-.tag { 
-  display: inline-block; 
-  padding: 4px 8px; 
-  border-radius: 999px; 
-  font-size: .8rem; 
-  background: var(--glass); 
-}
+
 
 /* Footer */
 footer { 
@@ -440,3 +550,20 @@ body {
 .muted {
   color: var(--muted);
 }
+
+/* Keep project button bottom-aligned */
+#projects-grid .card {
+  display: flex;
+  flex-direction: column;
+}
+
+#projects-grid .card p {
+  flex-grow: 1; /* description grows, pushing button down */
+}
+
+#projects-grid .card .btn {
+  margin-top: auto;          /* stick to bottom */
+  align-self: flex-start;    /* keep it left aligned */
+}
+
+
