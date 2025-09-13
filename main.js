@@ -122,26 +122,44 @@ $("#year").textContent = new Date().getFullYear();
   }
 })();
 
-// Modified education rendering with certificate links
+// Modified education rendering - single column like experience
 (function renderEducation() {
   const grid = $("#education-grid");
   if (grid && education && Array.isArray(education)) {
     education.forEach((ed) => {
-      const card = document.createElement("div");
-      card.className = "card reveal";
-      if (ed.degree) {
-        card.innerHTML = `<h3>${ed.degree}</h3><p>${ed.institution} — ${ed.year}</p>`;
-      } else {
+      if (ed.degree) { // Only render education degrees
+        const card = document.createElement("div");
+        card.className = "education-card reveal";
         card.innerHTML = `
-          <h3>${ed.certification}</h3>
-          <p>${ed.year}</p>
-          ${ed.certificateLink ? `<a href="${ed.certificateLink}" target="_blank" class="cert-link">View Certificate</a>` : ""}
+          <h3>${ed.degree}</h3>
+          <p class="muted">${ed.institution} ${ed.year}</p>
         `;
+        grid.appendChild(card);
       }
-      grid.appendChild(card);
     });
   }
 })();
+
+// New certification rendering - 2x2 grid like contact
+(function renderCertifications() {
+  const grid = $("#certification-grid");
+  if (grid && education && Array.isArray(education)) {
+    education.forEach((ed) => {
+      if (ed.certification) { // Only render certifications
+        const card = document.createElement("div");
+        card.className = "certification-card reveal";
+        card.innerHTML = `
+          <h3>${ed.certification}</h3>
+          <p class="muted">${ed.provider || ''} ${ed.year ? '— ' + ed.year : ''}</p>
+          ${ed.description ? `<p style="font-size: 0.85rem; margin-top: 8px;">${ed.description}</p>` : ''}
+          ${ed.certificateLink ? `<a href="${ed.certificateLink}" target="_blank" class="cert-link">View Certificate</a>` : ''}
+        `;
+        grid.appendChild(card);
+      }
+    });
+  }
+})();
+
 
 // Modified contact rendering with centered headings and WhatsApp
 (function renderContact() {
