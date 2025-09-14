@@ -491,41 +491,76 @@ body {
   }
 }
 
+
 /* Mobile Menu */
+/* Mobile Menu - IMPROVED */
 .mobile-menu {
-  position: absolute;
-  top: 100%;
-  left: 0;
-  right: 0;
+  position: fixed;           /* Fixed positioning for better mobile support */
+  top: 80px;                /* Adjust based on your nav height */
+  left: 16px;
+  right: 16px;
   background: var(--card);
   border-radius: 12px;
-  margin: 8px 16px;
+  box-shadow: 0 8px 26px rgba(2,6,23,0.25);
   opacity: 0;
   visibility: hidden;
   transform: translateY(-10px);
   transition: all 0.3s ease;
+  z-index: 9999;            /* High z-index */
+  max-height: 0;            /* Start collapsed */
+  overflow: hidden;
 }
 
 .mobile-menu.open {
   opacity: 1;
   visibility: visible;
   transform: translateY(0);
+  max-height: 500px;        /* Allow expansion */
 }
 
 .mobile-menu .card {
   padding: 16px;
+  background: var(--card);  /* Ensure light background */
+  border-radius: 12px;
 }
 
 .mobile-menu a {
   display: block;
-  padding: 8px 0;
-  border-bottom: 1px solid var(--glass);
+  padding: 12px 16px;       /* Better touch targets */
+  margin-bottom: 4px;
+  border-radius: 8px;
   font-weight: 600;
+  color: var(--text);       /* Ensure text visibility */
+  transition: all 0.2s ease;
+  border-bottom: 1px solid var(--glass);
+}
+
+.mobile-menu a:hover,
+.mobile-menu a:active {
+  background-color: var(--glass);
+  color: var(--accent);
 }
 
 .mobile-menu a:last-child {
   border-bottom: none;
+  margin-bottom: 0;
 }
+
+/* Ensure hamburger button is visible */
+.menu-toggle {
+  background: var(--card);
+  border: 1px solid var(--glass);
+  color: var(--text);
+  font-size: 18px;
+  padding: 8px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.menu-toggle:hover {
+  background: var(--glass);
+}
+
 
 /* Accessibility */
 .sr-only {
