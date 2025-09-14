@@ -42,27 +42,62 @@ $("#year").textContent = new Date().getFullYear();
   });
 })();
 
-// Mobile menu
+
+// Mobile menu - FIXED VERSION
 (function () {
   const toggle = $("#menu-toggle");
   const mobile = $("#mobile-menu");
+  let menuOpen = false;
+
   if (toggle && mobile) {
-    toggle.addEventListener("click", () => {
-      mobile.innerHTML = `
-        <div class="card">
-          <a href="#hero">Home</a>
-          <a href="#about">About</a>
-          <a href="#skills">Skills</a>
-          <a href="#projects">Projects</a>
-          <a href="#experience">Experience</a>
-          <a href="#education">Education</a>
-          <a href="#contact">Contact</a>
-        </div>
-      `;
-      mobile.classList.toggle("open");
+    toggle.addEventListener("click", (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      
+      if (!menuOpen) {
+        // Create menu content with emojis and close functionality
+        mobile.innerHTML = `
+          <div class="card">
+            <a href="#hero" class="mobile-link">🏠 Home</a>
+            <a href="#about" class="mobile-link">👨‍💻 About</a>
+            <a href="#skills" class="mobile-link">🚀 Skills</a>
+            <a href="#projects" class="mobile-link">💼 Projects</a>
+            <a href="#experience" class="mobile-link">💪 Experience</a>
+            <a href="#education" class="mobile-link">🎓 Education</a>
+            <a href="#certifications" class="mobile-link">🏆 Certifications</a>
+            <a href="#contact" class="mobile-link">📞 Contact</a>
+          </div>
+        `;
+        
+        // Add click handlers to close menu when links are clicked
+        const mobileLinks = mobile.querySelectorAll('.mobile-link');
+        mobileLinks.forEach(link => {
+          link.addEventListener('click', () => {
+            mobile.classList.remove("open");
+            menuOpen = false;
+          });
+        });
+        
+        mobile.classList.add("open");
+        menuOpen = true;
+      } else {
+        mobile.classList.remove("open");
+        menuOpen = false;
+      }
+    });
+
+    // Close menu when clicking outside
+    document.addEventListener('click', function(e) {
+      if (menuOpen && !mobile.contains(e.target) && !toggle.contains(e.target)) {
+        mobile.classList.remove("open");
+        menuOpen = false;
+      }
     });
   }
 })();
+
+
+
 
 // Render sections
 (function renderAbout() {
