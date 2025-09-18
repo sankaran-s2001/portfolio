@@ -28,13 +28,9 @@ const projects = [
     repo: "https://github.com/sankaran-s2001/SmartPDF-AI-RAG-Based-Document-Q-A-System",
     demo: "https://smartpdf-ai-rag-based-document-q-a-system-sankaran-s.streamlit.app/"
   },
-  {
-    title: "🎯 Brand Logo Detection System",
-    desc: "Custom-trained AI model for detecting brand logos and analyzing their screen positions.",
-    tags: ["Computer Vision", "AI", "Object Detection", "Streamlit"],
-    repo: "https://github.com/sankaran-s2001/Brand-Logo-Detection-and-Position-Analysis-System",
-    demo: "https://brand-logo-detection-and-position-analysis-system-b4fugsdbrjfc.streamlit.app/"
-  },
+
+// I deleted the brand logo detection project here
+  
   {
     title: "👁️ Object Detection Recognition",
     desc: "Real-time object detection web app using YOLO and deep learning models.",
@@ -247,4 +243,5 @@ const contact = [
   { type: "🐙 GitHub", value: "github.com/sankaran-s2001", link: "https://github.com/sankaran-s2001" },
   { type: "💬 WhatsApp", value: "+91 9677917815", link: "https://wa.me/919677917815" }
 ];
+
 
